@@ -10,11 +10,14 @@ steps:
   - script: |
       terraform init
     displayName: 'Initialize Terraform'
+    workingDirectory: terraform
 
   - script: |
       terraform plan -out=tfplan
     displayName: 'Plan Terraform Deployment'
+    workingDirectory: terraform
 
   - script: |
       terraform apply -auto-approve tfplan
     displayName: 'Apply Terraform Deployment'
+    workingDirectory: terraform
