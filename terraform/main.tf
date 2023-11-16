@@ -7,23 +7,22 @@ provider "azurerm" {
 
 # Define the Resource Group
 resource "azurerm_resource_group" "rg" {
-  name     = "service-bus-resources"
+  name     = "asb-poc-rg"
   location = "West Europe"
 }
 
 # Define the Service Bus Namespace
-resource "azurerm_servicebus_namespace" "namespace" {
-  name                = "example-sb-namespace"
+resource "azurerm_servicebus_namespace" "asb-namespace" {
+  name                = "asb-poc-namespace"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard"
 }
 
 # Define the Service Bus Queue
-resource "azurerm_servicebus_queue" "queue" {
+resource "azurerm_servicebus_queue" "test-queue" {
+  namespace_id        = azurerm_servicebus_namespace.asb-namespace.id
   name                = "example-sb-queue"
-  namespace_name      = azurerm_servicebus_namespace.namespace.name
-  resource_group_name = azurerm_resource_group.rg.name
-
+  #resource_group_name = azurerm_resource_group.rg.name
   enable_partitioning = true
 }

@@ -1,0 +1,20 @@
+trigger:
+  - main
+
+pool:
+  name: iac-poc-pool
+
+steps:
+  - checkout: self
+
+  - script: |
+      terraform init
+    displayName: 'Initialize Terraform'
+
+  - script: |
+      terraform plan -out=tfplan
+    displayName: 'Plan Terraform Deployment'
+
+  - script: |
+      terraform apply -auto-approve tfplan
+    displayName: 'Apply Terraform Deployment'
