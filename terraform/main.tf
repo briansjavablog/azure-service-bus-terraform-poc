@@ -22,7 +22,7 @@ resource "azurerm_servicebus_namespace" "asb-namespace" {
 # Define the Service Bus Queue
 resource "azurerm_servicebus_queue" "test-queue" {
   namespace_id        = azurerm_servicebus_namespace.asb-namespace.id
-  name                = "example-sb-queue"
+  name                = "sb-poc-queue"
   #resource_group_name = azurerm_resource_group.rg.name
   enable_partitioning = true
 }
