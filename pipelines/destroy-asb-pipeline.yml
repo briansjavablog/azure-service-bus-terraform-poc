@@ -13,6 +13,11 @@ steps:
     workingDirectory: terraform
 
   - script: |
+      terraform plan -out=tfplan
+    displayName: 'Plan Terraform Destroy ASB Deployment'
+    workingDirectory: terraform
+
+  - script: |
       terraform destroy -auto-approve
     displayName: 'Destroy Terraform ASB Resources'
     workingDirectory: terraform
