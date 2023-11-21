@@ -1,0 +1,23 @@
+trigger:
+  - main
+
+pool:
+  name: iac-poc-pool
+
+steps:
+  - checkout: self
+
+  - script: |
+      terraform init
+    displayName: 'Initialize Terraform'
+    workingDirectory: terraform
+
+  - script: |
+      terraform plan -out=tfplan
+    displayName: 'Plan Terraform ASB Deployment'
+    workingDirectory: terraform
+
+  - script: |
+      terraform apply -auto-approve tfplan
+    displayName: 'Apply Terraform ASB Deployment'
+    workingDirectory: terraform
