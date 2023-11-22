@@ -23,7 +23,7 @@ resource "azurerm_servicebus_queue" "test-queue-1" {
   default_message_ttl = "P10D"
   lock_duration = "PT1M"
   max_delivery_count = 5
-  max_message_size_in_kilobytes = 1024
+  # max_message_size_in_kilobytes = 1024 # not supported on standard SKU
   max_size_in_megabytes = 5120 # 5GB
   requires_duplicate_detection = false
   requires_session = false
@@ -39,7 +39,7 @@ resource "azurerm_servicebus_queue" "test-queue-2" {
   default_message_ttl = "P10D"
   lock_duration = "PT1M"
   max_delivery_count = 5
-  max_message_size_in_kilobytes = 1024
+  # max_message_size_in_kilobytes = 1024 # not supported on standard SKU
   max_size_in_megabytes = 5120 # 5GB
   requires_duplicate_detection = false
   requires_session = false
