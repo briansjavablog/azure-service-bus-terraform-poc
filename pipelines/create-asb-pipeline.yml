@@ -8,9 +8,15 @@ steps:
   - checkout: self
 
   - script: |
+      echo "Terraform init and apply"
+      export ARM_USE_MSI=true
+      export ARM_CLIENT_ID=$(managedIdentityClientId)
       terraform init
     displayName: 'Initialize Terraform'
     workingDirectory: terraform
+    env:
+      ARM_SUBSCRIPTION_ID: $(subscriptionId)
+      ARM_TENANT_ID: $(tenantId)
 
   - script: |
       terraform plan -out=tfplan
