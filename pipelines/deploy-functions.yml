@@ -1,0 +1,39 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Function app name
+  functionAppName: 'asb_test-function-app'
+  # Azure Service Connection
+  azureServiceConnection: 'your-azure-service-connection'
+  # Working Directory
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+steps:
+  - task: UseJava@1
+    inputs:
+      version: '17'
+      jdkArchitectureOption: 'x64'
+
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean package'
+      options: '-DskipTests'
+      publishJUnitResults: false
+      javaHomeOption: 'JDKVersion'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: false
+
+  - task: AzureFunctionApp@1
+    inputs:
+      azureSubscription: $(azureServiceConnection)
+      appType: 'functionAppLinux'
+      appName: $(functionAppName)
+      package: '$(workingDirectory)/target/azure-functions/$(functionAppName)/*'
+      runtimeStack: 'JAVA|17'
