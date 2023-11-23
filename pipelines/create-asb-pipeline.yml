@@ -1,3 +1,8 @@
+variables:
+  managedIdentityClientId: 'c7516409-8113-41d8-b994-6201c16a543a'
+  subscriptionId: 'f8ae64a8-decc-4be8-9dbe-e14eba877219'
+  tenantId: '29828deb-3c61-469d-a759-e2726411fdbe'
+
 trigger:
   - main
 
