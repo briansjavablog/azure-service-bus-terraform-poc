@@ -3,9 +3,6 @@ trigger:
 
 pool:
   name: iac-poc-pool
-  demands:
-    - maven
-    - Agent.Version -gt 2.182.1
 
 variables:
   # Function app name
