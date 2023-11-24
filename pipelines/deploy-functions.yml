@@ -17,6 +17,7 @@ steps:
       mavenPomFile: 'pom.xml'
       goals: 'clean package'
       options: '-DskipTests'
+      mavenPath: '/opt/apache-maven-3.9.5/bin/mvn'
       publishJUnitResults: false
       javaHomeOption: 'JDKVersion'
       mavenVersionOption: 'Default'
