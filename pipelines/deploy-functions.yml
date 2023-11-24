@@ -15,7 +15,7 @@ steps:
     inputs:
       versionSpec: '17'
       jdkArchitectureOption: 'x64'
-      jdkSourceOption: 'PreInstalled'
+      jdkSourceOption: 'InstallFromOpenJDKApi'
 
   - task: Maven@3
     inputs:
