@@ -29,11 +29,13 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
 
-  # Replace AzureFunctionApp task with Azure CLI script
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'Azure subscription 1'
+      azureSubscription: 'deploy-functions-pipeline-service-connection' # This still needs to be a valid service connection.
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        az functionapp deploy --name $(functionAppName) --resource-group <Resource-Group-Name> --src-path $(workingDirectory)/target/azure-functions/$(functionAppName)/* --type zip
+        az functionapp deployment source config-zip \
+          --name $(functionAppName) \
+          --resource-group <Resource-Group-Name> \
+          --src $(workingDirectory)/target/azure-functions/$(functionAppName)/*.zip
