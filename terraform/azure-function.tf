@@ -10,6 +10,7 @@ resource "azurerm_linux_function_app" "asb-test-function-app" {
     "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
     "FUNCTIONS_WORKER_RUNTIME" = "java"
   }
+  site_config {}
   /*site_config {
     always_on        = true // For example, to keep the function app always running
     ftps_state       = "Disabled"
