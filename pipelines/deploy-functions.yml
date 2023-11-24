@@ -32,7 +32,7 @@ steps:
   # Replace AzureFunctionApp task with Azure CLI script
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'Name of the Azure Resource Manager service connection'
+      azureSubscription: 'Azure subscription 1'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
