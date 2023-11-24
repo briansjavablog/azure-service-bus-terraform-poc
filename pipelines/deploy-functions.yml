@@ -11,10 +11,11 @@ variables:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 steps:
-  - task: UseJava@1
+  - task: JavaToolInstaller@0
     inputs:
-      version: '17'
+      versionSpec: '17'
       jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
 
   - task: Maven@3
     inputs:
