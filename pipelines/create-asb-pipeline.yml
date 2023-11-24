@@ -41,3 +41,6 @@ steps:
       terraform apply -auto-approve tfplan
     displayName: 'Apply Terraform ASB & Function App Deployment'
     workingDirectory: terraform
+    env:
+      ARM_SUBSCRIPTION_ID: $(subscriptionId)
+      ARM_TENANT_ID: $(tenantId)
