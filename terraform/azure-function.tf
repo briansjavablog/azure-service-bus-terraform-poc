@@ -2,7 +2,7 @@ resource "azurerm_function_app" "asb_test-function-app" {
   name                       = "asb_test-function-app"
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
-  app_service_plan_id        = azurerm_app_service_plan.example.id
+  app_service_plan_id        = azurerm_service_plan.service-plan.id
   storage_account_name       = azurerm_storage_account.funct-storage-account.name
   storage_account_access_key = azurerm_storage_account.funct-storage-account.primary_access_key
   os_type                    = "linux"
@@ -14,17 +14,19 @@ resource "azurerm_function_app" "asb_test-function-app" {
   }
 }
 
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_service_plan" "service-plan" {
   name                = "asb_test-app-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   kind                = "FunctionApp"
   reserved            = true # Required for Linux plans
 
-  sku {
+  /*sku {
     tier = "Dynamic"
     size = "Y1"
-  }
+  }*/
+  os_type  = "Linux"
+  sku_name = "F1"
 }
 
 resource "azurerm_storage_account" "funct-storage-account" {
