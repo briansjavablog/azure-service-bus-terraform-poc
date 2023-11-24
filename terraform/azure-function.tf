@@ -6,7 +6,7 @@ resource "azurerm_function_app" "asb_test-function-app" {
   storage_account_name       = azurerm_storage_account.funct-storage-account.name
   storage_account_access_key = azurerm_storage_account.funct-storage-account.primary_access_key
   os_type                    = "linux"
-  functions_extension_version = "~3"
+  #functions_extension_version = "~3"
 
   app_settings = {
     "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
