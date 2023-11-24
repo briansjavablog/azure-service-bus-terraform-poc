@@ -1,5 +1,5 @@
 resource "azurerm_function_app" "asb_test-function-app" {
-  name                       = "asb_test-function-app"
+  name                       = "asb-test-function-app"
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
   app_service_plan_id        = azurerm_service_plan.service-plan.id
@@ -15,7 +15,7 @@ resource "azurerm_function_app" "asb_test-function-app" {
 }
 
 resource "azurerm_service_plan" "service-plan" {
-  name                = "asb_test-app-service-plan"
+  name                = "asb-test-app-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   #kind                = "FunctionApp"
