@@ -18,8 +18,8 @@ resource "azurerm_service_plan" "service-plan" {
   name                = "asb_test-app-service-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  kind                = "FunctionApp"
-  reserved            = true # Required for Linux plans
+  #kind                = "FunctionApp"
+  #reserved            = true # Required for Linux plans
 
   /*sku {
     tier = "Dynamic"
