@@ -1,4 +1,4 @@
-resource "azurerm_linux_function_app" "asb_test-function-app" {
+resource "azurerm_linux_function_app" "asb-test-function-app" {
   name                       = "asb-test-function-app"
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
@@ -30,7 +30,7 @@ resource "azurerm_service_plan" "service-plan" {
     size = "Y1"
   }*/
   os_type  = "Linux"
-  sku_name = "F1"
+  sku_name = "Y1"
 }
 
 resource "azurerm_storage_account" "func-storage-account" {
