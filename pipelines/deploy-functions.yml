@@ -55,7 +55,8 @@ steps:
 
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'deploy-functions-pipeline-service-connection' # This still needs to be a valid service connection.
+      #azureSubscription: 'deploy-functions-pipeline-service-connection' # This still needs to be a valid service connection.
+      azureSubscription: 'test-conn' # This still needs to be a valid service connection.
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
