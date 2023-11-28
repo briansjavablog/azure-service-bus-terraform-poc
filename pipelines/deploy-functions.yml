@@ -59,7 +59,8 @@ steps:
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
+        az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
         az functionapp deployment source config-zip \
-          --name $(functionAppName) \
-          --resource-group <Resource-Group-Name> \
+          --name asb-test-function-app \
+          --resource-group asb-poc-rg \
           --src $(workingDirectory)/target/azure-functions/$(functionAppName)/*.zip
