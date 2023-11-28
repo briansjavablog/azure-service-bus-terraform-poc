@@ -13,23 +13,23 @@ variables:
 steps:
 
   - script: |
-    # Downloading the latest version of Maven, change URL if necessary
-              wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-    
-    # Extracting Maven to the /opt directory
-              sudo tar -xvzf apache-maven-*-bin.tar.gz -C /opt
-    
-    # Renaming the extracted folder to a generic name to avoid changing paths in the future
-              sudo mv /opt/apache-maven-* /opt/maven
-    
-    # Setting up environment variables
-              MAVEN_HOME=/opt/maven
-              PATH=$PATH:$MAVEN_HOME/bin
-              echo "export MAVEN_HOME=/opt/maven" | sudo tee -a /etc/profile.d/maven.sh
-              echo "export PATH=$PATH:$MAVEN_HOME/bin" | sudo tee -a /etc/profile.d/maven.sh
-    
-    # Loading the new environment variables
-              source /etc/profile.d/maven.sh
+      # Downloading the latest version of Maven, change URL if necessary
+      wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+      
+      # Extracting Maven to the /opt directory
+      sudo tar -xvzf apache-maven-*-bin.tar.gz -C /opt
+      
+      # Renaming the extracted folder to a generic name to avoid changing paths in the future
+      sudo mv /opt/apache-maven-* /opt/maven
+      
+      # Setting up environment variables
+      MAVEN_HOME=/opt/maven
+      PATH=$PATH:$MAVEN_HOME/bin
+      echo "export MAVEN_HOME=/opt/maven" | sudo tee -a /etc/profile.d/maven.sh
+      echo "export PATH=\$PATH:\$MAVEN_HOME/bin" | sudo tee -a /etc/profile.d/maven.sh
+      
+      # Loading the new environment variables
+      source /etc/profile.d/maven.sh
     displayName: 'Install latest Maven'
 
   - task: Maven@3
