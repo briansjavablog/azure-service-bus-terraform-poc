@@ -30,12 +30,20 @@ steps:
       
       # Loading the new environment variables
       source /etc/profile.d/maven.sh
+      
+      # Set MAVEN_HOME as a pipeline variable
+      echo "##vso[task.setvariable variable=MAVEN_HOME]/opt/maven"
+    
+      # Add Maven bin to the PATH for subsequent tasks
+      echo "##vso[task.setvariable variable=PATH]$(PATH):/opt/maven/bin"
+
     displayName: 'Install latest Maven'
 
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean package'
+      mavenPath: '$(MAVEN_HOME)/bin/mvn' # Use the MAVEN_HOME variable set in the previous step
       publishJUnitResults: false
       javaHomeOption: 'JDKVersion'
       mavenVersionOption: 'Default'
