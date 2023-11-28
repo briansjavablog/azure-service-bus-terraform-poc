@@ -13,29 +13,31 @@ variables:
 steps:
 
   - script: |
-      # Downloading the latest version of Maven, change URL if necessary
+      # Downloading the latest version of Maven
       wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-      
+
       # Extracting Maven to the /opt directory
-      sudo tar -xvzf apache-maven-*-bin.tar.gz -C /opt
-      
-      # Renaming the extracted folder to a generic name to avoid changing paths in the future
-      sudo mv /opt/apache-maven-* /opt/maven
-      
+      sudo tar -xvzf apache-maven-3.8.6-bin.tar.gz -C /opt
+
+      # Create the directory if it doesn't exist to ensure the mv command knows it's a directory
+      sudo mkdir -p /opt/maven
+
+      # Now move the extracted Maven into the directory
+      # If the wildcard expands to multiple items, the mv command will know /opt/maven is a directory
+      sudo mv /opt/apache-maven-3.8.6/* /opt/maven/
+
       # Setting up environment variables
-      MAVEN_HOME=/opt/maven
-      PATH=$PATH:$MAVEN_HOME/bin
       echo "export MAVEN_HOME=/opt/maven" | sudo tee -a /etc/profile.d/maven.sh
       echo "export PATH=\$PATH:\$MAVEN_HOME/bin" | sudo tee -a /etc/profile.d/maven.sh
-      
+
       # Loading the new environment variables
       source /etc/profile.d/maven.sh
       
       # Set MAVEN_HOME as a pipeline variable
       echo "##vso[task.setvariable variable=MAVEN_HOME]/opt/maven"
-    
+      
       # Add Maven bin to the PATH for subsequent tasks
-      echo "##vso[task.setvariable variable=PATH]$(PATH):/opt/maven/bin"
+      echo "##vso[task.setvariable variable=PATH]$(PATH):/opt/maven/bin"    
 
     displayName: 'Install latest Maven'
 
