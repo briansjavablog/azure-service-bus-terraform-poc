@@ -53,8 +53,21 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
 
-  - script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'path_to_your_zip_file_directory' # Update this to the directory where your ZIP file is located
+      ArtifactName: 'FunctionAppZip'
+      publishLocation: 'Container'
+
+
+  #- script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
+  - script: ls -al $(workingDirectory)
     displayName: 'List files in target directory'
+
+  - script: |
+      zip -r functionapp.zip . -x "*.jar" -x "target/*" -x "src/*"
+    displayName: 'Package Function App as ZIP'
+    workingDirectory: $(workingDirectory) # Adjust as needed
 
   - task: AzureCLI@2
     inputs:
