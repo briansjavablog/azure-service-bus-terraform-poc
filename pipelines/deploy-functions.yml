@@ -53,11 +53,11 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: 'path_to_your_zip_file_directory' # Update this to the directory where your ZIP file is located
-      ArtifactName: 'FunctionAppZip'
-      publishLocation: 'Container'
+  #- task: PublishBuildArtifacts@1
+  #  inputs:
+  #    PathtoPublish: 'path_to_your_zip_file_directory' # Update this to the directory where your ZIP file is located
+  #    ArtifactName: 'FunctionAppZip'
+  #    publishLocation: 'Container'
 
 
   #- script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
