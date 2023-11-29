@@ -53,6 +53,9 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
 
+  - script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
+    displayName: 'List files in target directory'
+
   - task: AzureCLI@2
     inputs:
       #azureSubscription: 'deploy-functions-pipeline-service-connection' # This still needs to be a valid service connection.
@@ -62,6 +65,6 @@ steps:
       inlineScript: |
         az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
         az functionapp deployment source config-zip \
-          --name asb-test-function-app \
+          --name $(functionAppName) \
           --resource-group asb-poc-rg \
           --src $(workingDirectory)/target/azure-functions/$(functionAppName)/*.zip
