@@ -64,10 +64,29 @@ steps:
   - script: ls -al $(workingDirectory)/target
     displayName: 'List files in target directory'
 
+  #- script: |
+  #    zip -r functionapp.zip . -x "*.jar" -x "target/*" -x "src/*"
+  #  displayName: 'Package Function App as ZIP'
+  #  workingDirectory: $(workingDirectory)/target/azure-functions/ # Adjust as needed
+
   - script: |
-      zip -r functionapp.zip . -x "*.jar" -x "target/*" -x "src/*"
-    displayName: 'Package Function App as ZIP'
-    workingDirectory: $(workingDirectory) # Adjust as needed
+      # Move to the target directory
+      cd target/azure-functions/
+
+      # Find the directory with the pattern 'asbfunctions-'
+      dir=$(find . -type d -name 'asbfunctions-*' | head -n 1)
+
+      # Remove './' from the start of the directory path
+      dir=${dir:2}
+
+      # Echo the directory name for debugging
+      echo "Directory to zip: $dir"
+
+      # Create a ZIP file of the directory contents
+      zip -r ../../functionapp.zip "$dir"
+
+    displayName: 'Zip Function App'
+    workingDirectory: $(System.DefaultWorkingDirectory)
 
   - task: AzureCLI@2
     inputs:
