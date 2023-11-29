@@ -89,7 +89,8 @@ steps:
       # Create a ZIP file of the directory contents
       zip -r ../../functionapp.zip "$dir"
 
-      ls -al $(workingDirectory)/target/azure-functions
+      echo "Listing Directory: /target/azure-functions/$dir"
+      ls -al $(workingDirectory)/target/azure-functions/$dir
 
     displayName: 'Zip Function App'
     workingDirectory: $(System.DefaultWorkingDirectory)
