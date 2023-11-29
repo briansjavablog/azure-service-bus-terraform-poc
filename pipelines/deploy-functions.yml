@@ -70,6 +70,10 @@ steps:
   #  workingDirectory: $(workingDirectory)/target/azure-functions/ # Adjust as needed
 
   - script: |
+      
+      # install zip
+      sudo apt-get install zip -y
+      
       # Move to the target directory
       cd target/azure-functions/
 
