@@ -117,3 +117,4 @@ steps:
           --name $(functionAppName) \
           --resource-group asb-poc-rg \
           --src $(workingDirectory)/functionapp.zip
+          --debug
