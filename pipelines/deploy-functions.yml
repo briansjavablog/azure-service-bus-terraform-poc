@@ -91,6 +91,12 @@ steps:
 
       echo "Listing Directory: /target/azure-functions/$dir"
       ls -al $(workingDirectory)/target/azure-functions/$dir
+      
+      echo "Listing Directory: /target"
+      ls -al $(workingDirectory)/target
+      
+      echo "Listing Directory: $(workingDirectory)"
+      ls -al $(workingDirectory)
 
     displayName: 'Zip Function App'
     workingDirectory: $(System.DefaultWorkingDirectory)
