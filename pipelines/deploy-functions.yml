@@ -61,7 +61,7 @@ steps:
 
 
   #- script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
-  - script: ls -al $(workingDirectory)
+  - script: ls -al $(workingDirectory)/target
     displayName: 'List files in target directory'
 
   - script: |
