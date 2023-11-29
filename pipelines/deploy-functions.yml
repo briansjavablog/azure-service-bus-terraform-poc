@@ -6,7 +6,7 @@ pool:
 
 variables:
   # Function app name
-  functionAppName: 'asb-test-function-app-2'
+  functionAppName: 'asb-test-function-app'
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)'
 
