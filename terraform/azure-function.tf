@@ -6,10 +6,10 @@ resource "azurerm_linux_function_app" "asb-test-function-app" {
   storage_account_name       = azurerm_storage_account.func-storage-account.name
   storage_account_access_key = azurerm_storage_account.func-storage-account.primary_access_key
   #os_type                    = "linux"
-  app_settings = {
-    "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
+  #app_settings = {
+  #  "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
     # "FUNCTIONS_WORKER_RUNTIME" = "java"
-  }
+  #}
   functions_extension_version = "4"
 
   site_config {
