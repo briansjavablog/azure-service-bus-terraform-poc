@@ -5,11 +5,19 @@ trigger:
 pool:
   name: iac-poc-pool
 
+parameters:
+  - name: asbKey
+    displayName: 'ASB Key'
+    type: string
+    default: ''
+
 variables:
   # Function app name
   functionAppName: 'bh-test-app'
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)'
+  # ASB Key
+  asbKey: ${{ parameters.asbKey }}
 
 steps:
 
@@ -114,7 +122,7 @@ steps:
         ls -al $(workingDirectory)
         
         az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
-        mvn azure-functions:deploy
+        mvn azure-functions:deploy -DasbKey=$(asbKey)
         
         #az functionapp deployment source config-zip \
         #  --name $(functionAppName) \
