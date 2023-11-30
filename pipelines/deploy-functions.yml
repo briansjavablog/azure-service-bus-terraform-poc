@@ -1,6 +1,5 @@
 trigger:
   - none
-  #- main
 
 pool:
   name: iac-poc-pool
@@ -62,21 +61,8 @@ steps:
       effectivePomSkip: false
       sonarQubeRunAnalysis: false
 
-  #- task: PublishBuildArtifacts@1
-  #  inputs:
-  #    PathtoPublish: 'path_to_your_zip_file_directory' # Update this to the directory where your ZIP file is located
-  #    ArtifactName: 'FunctionAppZip'
-  #    publishLocation: 'Container'
-
-
-  #- script: ls -al $(workingDirectory)/target/azure-functions/$(functionAppName)/
   - script: ls -al $(workingDirectory)/target
     displayName: 'List files in target directory'
-
-  #- script: |
-  #    zip -r functionapp.zip . -x "*.jar" -x "target/*" -x "src/*"
-  #  displayName: 'Package Function App as ZIP'
-  #  workingDirectory: $(workingDirectory)/target/azure-functions/ # Adjust as needed
 
   - script: |
       
@@ -111,8 +97,8 @@ steps:
     workingDirectory: $(System.DefaultWorkingDirectory)
 
   - task: AzureCLI@2
+    displayName: 'Function App Deployment'
     inputs:
-      #azureSubscription: 'deploy-functions-pipeline-service-connection' # This still needs to be a valid service connection.
       azureSubscription: 'test-conn' # This still needs to be a valid service connection.
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
@@ -123,8 +109,3 @@ steps:
         
         az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
         mvn azure-functions:deploy -DasbKey=$(asbKey)
-        
-        #az functionapp deployment source config-zip \
-        #  --name $(functionAppName) \
-        #  --resource-group asb-poc-rg \
-        #  --src $(workingDirectory)/functionapp.zip
