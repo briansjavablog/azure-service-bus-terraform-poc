@@ -15,7 +15,7 @@ resource "azurerm_function_app" "asb-test-function-app" {
   os_type = "linux" // Specify the OS type
 
   site_config {
-    linux_fx_version = "JAVA|11" // Set to Java 11 as it's a known supported version
+    linux_fx_version = "JAVA|17"
   }
 }
 
