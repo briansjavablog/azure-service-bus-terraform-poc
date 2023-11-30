@@ -8,7 +8,7 @@ resource "azurerm_linux_function_app" "asb-test-function-app" {
   #os_type                    = "linux"
   app_settings = {
     "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
-    "FUNCTIONS_WORKER_RUNTIME" = "java"
+    # "FUNCTIONS_WORKER_RUNTIME" = "java"
   }
   functions_extension_version = "4"
 
