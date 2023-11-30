@@ -114,7 +114,9 @@ steps:
         ls -al $(workingDirectory)
         
         az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
-        az functionapp deployment source config-zip \
-          --name $(functionAppName) \
-          --resource-group asb-poc-rg \
-          --src $(workingDirectory)/functionapp.zip
+        mvn azure-functions:deploy
+        
+        #az functionapp deployment source config-zip \
+        #  --name $(functionAppName) \
+        #  --resource-group asb-poc-rg \
+        #  --src $(workingDirectory)/functionapp.zip
