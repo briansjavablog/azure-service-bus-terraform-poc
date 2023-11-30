@@ -1,22 +1,21 @@
-resource "azurerm_linux_function_app" "asb-test-function-app" {
+resource "azurerm_function_app" "asb-test-function-app" {
   name                       = "asb-test-function-app"
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
-  service_plan_id            = azurerm_service_plan.service-plan.id
+  app_service_plan_id        = azurerm_service_plan.service-plan.id
   storage_account_name       = azurerm_storage_account.func-storage-account.name
   storage_account_access_key = azurerm_storage_account.func-storage-account.primary_access_key
 
-  #os_type                    = "linux"
- # app_settings = {
-    #  "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
- #   "FUNCTIONS_WORKER_RUNTIME" = "java"
- # }
-  #functions_extension_version = "~4"
+  app_settings = {
+    "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
+    "FUNCTIONS_WORKER_RUNTIME" = "java"
+    "FUNCTIONS_EXTENSION_VERSION" = "~4"
+  }
+
+  os_type = "linux" // Specify the OS type
 
   site_config {
-    application_stack {
-      java_version = "17"
-    }
+    linux_fx_version = "JAVA|11" // Set to Java 11 as it's a known supported version
   }
 }
 
@@ -26,6 +25,7 @@ resource "azurerm_service_plan" "service-plan" {
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "Y1"
+  reserved            = true // Required for Linux plans
 }
 
 resource "azurerm_storage_account" "func-storage-account" {
@@ -35,3 +35,5 @@ resource "azurerm_storage_account" "func-storage-account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
+
+# Ensure you also have the azurerm_resource_group and azurerm_servicebus_namespace resources defined.
