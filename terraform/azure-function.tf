@@ -10,7 +10,7 @@ resource "azurerm_linux_function_app" "asb-test-function-app" {
   #  "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
     # "FUNCTIONS_WORKER_RUNTIME" = "java"
   #}
-  functions_extension_version = "4"
+  functions_extension_version = "~4"
 
   site_config {
     application_stack {
