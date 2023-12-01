@@ -11,8 +11,6 @@ parameters:
     default: ''
 
 variables:
-  # Function app name
-  functionAppName: 'bh-test-app'
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   # ASB Key
@@ -21,7 +19,7 @@ variables:
 steps:
 
   - script: |
-      # Downloading the latest version of Maven
+      # Downloading Maven 3.8.6
       wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
 
       # Extracting Maven to the /opt directory
@@ -31,7 +29,6 @@ steps:
       sudo mkdir -p /opt/maven
 
       # Now move the extracted Maven into the directory
-      # If the wildcard expands to multiple items, the mv command will know /opt/maven is a directory
       sudo mv /opt/apache-maven-3.8.6/* /opt/maven/
 
       # Setting up environment variables
@@ -50,6 +47,7 @@ steps:
     displayName: 'Install latest Maven'
 
   - task: Maven@3
+    displayName: 'Package Functions'
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean package'
@@ -97,7 +95,7 @@ steps:
     workingDirectory: $(System.DefaultWorkingDirectory)
 
   - task: AzureCLI@2
-    displayName: 'Function App Deployment'
+    displayName: 'Deploy Function App'
     inputs:
       azureSubscription: 'test-conn' # This still needs to be a valid service connection.
       scriptType: 'bash'
