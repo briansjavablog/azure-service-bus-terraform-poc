@@ -4,18 +4,10 @@ trigger:
 pool:
   name: iac-poc-pool
 
-parameters:
-  - name: asbKey
-    displayName: 'ASB Key'
-    type: string
-    default: ''
-
 variables:
   functionBuildDirectory: target/azure-functions/asb-function-app
-  # Working Directory
+  functionAppName: asb-function-app
   workingDirectory: '$(System.DefaultWorkingDirectory)'
-  # ASB Key
-  asbKey: ${{ parameters.asbKey }}
 
 steps:
 
