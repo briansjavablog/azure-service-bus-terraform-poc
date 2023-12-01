@@ -5,7 +5,7 @@ resource "azurerm_function_app" "asb-test-function-app" {
   app_service_plan_id        = azurerm_service_plan.service-plan.id
   storage_account_name       = azurerm_storage_account.func-storage-account.name
   storage_account_access_key = azurerm_storage_account.func-storage-account.primary_access_key
-
+  version = "~4"
   app_settings = {
     "AzureWebJobsServiceBus" = azurerm_servicebus_namespace.asb-namespace.default_primary_connection_string
     "FUNCTIONS_WORKER_RUNTIME" = "java"
