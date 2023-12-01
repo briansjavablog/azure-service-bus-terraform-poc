@@ -11,6 +11,7 @@ parameters:
     default: ''
 
 variables:
+  functionBuildDirectory: target/azure-functions/asb-function-app
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   # ASB Key
@@ -68,28 +69,17 @@ steps:
       sudo apt-get install zip -y
       
       # Move to the target directory
-      cd target/azure-functions/
+      echo "moving to: $(functionBuildDirectory)"
+      cd $(functionBuildDirectory)
 
-      # Find the directory with the pattern 'asbfunctions-'
-      dir=$(find . -type d -name 'asbfunctions-*' | head -n 1)
-
-      # Remove './' from the start of the directory path
-      dir=${dir:2}
-
-      # Echo the directory name for debugging
-      echo "Directory to zip: $dir"
+      echo "Listing Directory: $(functionBuildDirectory)"
+      ls -al $(functionBuildDirectory)
 
       # Create a ZIP file of the directory contents
-      zip -r ../../functionapp.zip "$dir"
+      zip -r asb-function-app.zip .
 
-      echo "Listing Directory: /target/azure-functions/$dir"
-      ls -al $(workingDirectory)/target/azure-functions/$dir
-      
-      echo "Listing Directory: /target"
-      ls -al $(workingDirectory)/target
-      
-      echo "Listing Directory: $(workingDirectory)"
-      ls -al $(workingDirectory)
+      echo "Listing Directory: $(functionBuildDirectory)"
+      ls -al $(functionBuildDirectory)
 
     displayName: 'Zip Function App'
     workingDirectory: $(System.DefaultWorkingDirectory)
@@ -105,5 +95,9 @@ steps:
         echo "Listing Directory: $(workingDirectory)"
         ls -al $(workingDirectory)
         
-        az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219
-        mvn azure-functions:deploy -DasbKey=$(asbKey)
+        az account set --subscription f8ae64a8-decc-4be8-9dbe-e14eba877219    
+        
+        az functionapp deployment source config-zip \
+                 --name $(functionAppName) \
+                 --resource-group asb-poc-rg \
+                 --src $(functionBuildDirectory)/asb-function-app.zip
