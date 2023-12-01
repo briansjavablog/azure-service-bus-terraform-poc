@@ -14,7 +14,7 @@ public class MessageReceiverFunction {
             @ServiceBusQueueTrigger(name = "msg", queueName = "sb-poc-queue-1", connection = "AzureWebJobsServiceBus") String message,
             final ExecutionContext context) {
 
-        context.getLogger().info("MessageReceiverFunction processed a message: " + message);
+        context.getLogger().info("MessageReceiverFunction received message from queue: " + message);
     }
 
 }

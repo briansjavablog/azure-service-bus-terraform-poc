@@ -19,7 +19,7 @@ public class MessageSenderFunction {
             @ServiceBusQueueOutput(name = "out", queueName = "sb-poc-queue-1", connection = "AzureWebJobsServiceBus") OutputBinding<String> outputItem,
             final ExecutionContext context, @BindingName("message") String message) {
 
-        context.getLogger().info("Java HTTP trigger processed a request to send a message.");
+        context.getLogger().info("Received message " + message + " - adding message to queue");
 
         // set the message from URI parameter to the Service Bus queue
         outputItem.setValue(message);
