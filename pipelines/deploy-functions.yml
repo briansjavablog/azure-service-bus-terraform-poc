@@ -69,17 +69,17 @@ steps:
       sudo apt-get install zip -y
       
       # Move to the target directory
-      echo "moving to: $(functionBuildDirectory)"
-      cd $(functionBuildDirectory)
+      echo "moving to: $(workingDirectory)/$(functionBuildDirectory)"
+      cd $(workingDirectory)/$(functionBuildDirectory)
 
       echo "Listing Directory: $(functionBuildDirectory)"
-      ls -al $(functionBuildDirectory)
+      ls -al $(workingDirectory)/$(functionBuildDirectory)
 
       # Create a ZIP file of the directory contents
       zip -r asb-function-app.zip .
 
       echo "Listing Directory: $(functionBuildDirectory)"
-      ls -al $(functionBuildDirectory)
+      ls -al $(workingDirectory)/$(functionBuildDirectory)
 
     displayName: 'Zip Function App'
     workingDirectory: $(System.DefaultWorkingDirectory)
