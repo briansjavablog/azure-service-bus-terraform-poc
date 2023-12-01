@@ -92,4 +92,5 @@ steps:
         az functionapp deployment source config-zip \
                  --name $(functionAppName) \
                  --resource-group asb-poc-rg \
-                 --src $(functionBuildDirectory)/asb-function-app.zip
+                 --src $(functionBuildDirectory)/asb-function-app.zip \
+                 --debug
