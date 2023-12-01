@@ -35,5 +35,3 @@ resource "azurerm_storage_account" "func-storage-account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
-
-# Ensure you also have the azurerm_resource_group and azurerm_servicebus_namespace resources defined.
