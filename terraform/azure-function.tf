@@ -1,5 +1,5 @@
-resource "azurerm_function_app" "asb-test-function-app" {
-  name                       = "asb-test-function-app"
+resource "azurerm_function_app" "asb-function-app" {
+  name                       = "asb-function-app"
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
   app_service_plan_id        = azurerm_service_plan.service-plan.id
