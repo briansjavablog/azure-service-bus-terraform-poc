@@ -25,7 +25,6 @@ resource "azurerm_service_plan" "service-plan" {
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "Y1"
-  #reserved            = true // Required for Linux plans
 }
 
 resource "azurerm_storage_account" "func-storage-account" {

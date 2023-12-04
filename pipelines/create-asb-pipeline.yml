@@ -15,7 +15,7 @@ steps:
   - script: |
       echo "Terraform init"
       export ARM_USE_MSI=true
-      export ARM_CLIENT_ID=$(managedIdentityClientId)
+      # export ARM_CLIENT_ID=$(managedIdentityClientId)
       terraform init
     displayName: 'Initialize Terraform'
     workingDirectory: terraform
@@ -26,7 +26,7 @@ steps:
   - script: |
       echo "Terraform plan"
       export ARM_USE_MSI=true
-      export ARM_CLIENT_ID=$(managedIdentityClientId)
+      # export ARM_CLIENT_ID=$(managedIdentityClientId)
       terraform plan -out=tfplan
     displayName: 'Plan Terraform ASB & Function App Deployment'
     workingDirectory: terraform
@@ -37,7 +37,7 @@ steps:
   - script: |
       echo "Terraform apply"
       export ARM_USE_MSI=true
-      export ARM_CLIENT_ID=$(managedIdentityClientId)
+      # export ARM_CLIENT_ID=$(managedIdentityClientId)
       terraform apply -auto-approve tfplan
     displayName: 'Apply Terraform ASB & Function App Deployment'
     workingDirectory: terraform
